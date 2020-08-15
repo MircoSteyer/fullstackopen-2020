@@ -1,18 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from "axios"
 import Search from "./components/Search";
 import AddPersonForm from "./components/AddPersonForm";
 import PhonebookEntries from "./components/PhonebookEntries";
 
 const App = () => {
-    const mockPersons = [
-        {name: "Arto Hellas", number: "1234"},
-        {name: "Mirco", number: "1234"},
-        {name: "Antonia", number: "1234"}]
-
-    const [persons, setPersons] = useState(mockPersons)
+    const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState("")
     const [newNumber, setNewNumber] = useState("")
     const [searchValue, setSearchValue] = useState("")
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:3001/persons")
+            .then((response) => {
+                setPersons(response.data)
+            })
+    }, [])
 
     let shownPersons = [...persons]
     if (searchValue) shownPersons = persons.filter(person => person.name.toLowerCase().includes(searchValue.toLowerCase()))
