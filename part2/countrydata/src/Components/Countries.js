@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SingleCountry from "./SingleCountry";
 
 const Countries = ({countries}) => {
+
+    const [selectedCountry, setSelectedCountry] = useState(countries[0])
+
+    const handleOnClick = (country) => () => {
+        setSelectedCountry(country)
+    }
+
+    if (selectedCountry) return <SingleCountry country={selectedCountry}/>
 
     if (countries.length > 10) return <div>Too many matches. Specify a filter.</div>
 
@@ -9,7 +17,11 @@ const Countries = ({countries}) => {
 
     return (
         <div>
-            {countries.map(country => <li key={country.alpha3Code}>{country.name}</li>)}
+            {countries.map(country =>
+                <li key={country.alpha3Code}>
+                    {country.name}
+                    <button onClick={handleOnClick(country)}>Show</button>
+                </li>)}
         </div>
     );
 };
