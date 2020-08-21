@@ -3,6 +3,7 @@ import axios from "axios"
 import Search from "./components/Search";
 import AddPersonForm from "./components/AddPersonForm";
 import PhonebookEntries from "./components/PhonebookEntries";
+import personService from "./services/persons"
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -41,8 +42,21 @@ const App = () => {
             name: newName,
             number: newNumber
         }
-        setPersons(persons.concat(newPerson))
+
+        personService
+            .addPerson(newPerson)
+            .then(response => setPersons(persons.concat(response)))
+
         resetForm()
+    }
+    
+    const deletePerson = (person) => () => {
+
+        if (window.confirm(`Delete ${person.name}?`)) {
+            personService
+                .deletePerson(person.id)
+                .then(response => setPersons(persons.filter(personInList => personInList.id !== person.id)))
+        }
     }
 
     return (
@@ -60,7 +74,7 @@ const App = () => {
             />
 
             <h2>Numbers</h2>
-            <PhonebookEntries shownPersons={shownPersons}/>
+            <PhonebookEntries shownPersons={shownPersons} deletePerson={deletePerson}/>
 
         </div>
     )

@@ -1,9 +1,16 @@
 import React from 'react';
 
-const PhonebookEntries = ({shownPersons}) => {
+const PhonebookEntries = ({shownPersons, deletePerson}) => {
+
     return (
         <div>
-            {shownPersons.map(person => (<li key={person.name}>{person.name}: {person.number}</li>))}
+            {shownPersons.map(person => (
+                <div key={person.id}>
+                    <li>{person.name}: {person.number}</li>
+                    <button onClick={deletePerson(person)}>Delete</button>
+                </div>
+            ))}
+
         </div>
     );
 };
