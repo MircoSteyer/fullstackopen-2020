@@ -12,6 +12,7 @@ const App = () => {
     const [newNumber, setNewNumber] = useState("")
     const [searchValue, setSearchValue] = useState("")
     const [currentMessage, setCurrentMessage] = useState(null)
+    const [messageType, setMessageType] = useState(null)
 
     useEffect(() => {
         axios
@@ -33,7 +34,13 @@ const App = () => {
         setNewNumber("")
     }
 
-    const handleErrorMessage = (text, duration) => {
+    const MessageTypeEnum = {
+            SUCCESS: "success",
+            ERROR: "error"
+        }
+
+    const handleMessage = (text, duration, type) => {
+        setMessageType(type)
         setCurrentMessage(text)
         setTimeout(() => {
             setCurrentMessage(null)
@@ -49,9 +56,13 @@ const App = () => {
             personService
                 .updatePerson(updatedPerson)
                 .then(response => setPersons(persons.map(person => person.id === updatedPerson.id ? response : person)))
+                .catch((error) => {
+                    console.log(error)
+                    handleMessage(`${updatedPerson.name} has already been removed from server.`,5000, MessageTypeEnum.ERROR)
+                })
 
             resetForm()
-            handleErrorMessage(`Changed the number of ${updatedPerson.name}.`, 5000)
+            handleMessage( `Changed the number of ${updatedPerson.name}.`, 5000, MessageTypeEnum.SUCCESS)
             return
         }
 
@@ -65,7 +76,7 @@ const App = () => {
             .then(response => setPersons(persons.concat(response)))
 
         resetForm()
-        handleErrorMessage(`Added ${newPerson.name} to phonebook.`, 5000)
+        handleMessage(`Added ${newPerson.name} to phonebook.`, 5000, MessageTypeEnum.SUCCESS)
     }
     
     const deletePerson = (person) => () => {
@@ -74,14 +85,14 @@ const App = () => {
             personService
                 .deletePerson(person.id)
                 .then(response => setPersons(persons.filter(personInList => personInList.id !== person.id)))
-            handleErrorMessage(`Successfully deleted ${person.name}.`, 5000)
+            handleMessage(`Successfully deleted ${person.name}.`, 5000)
         }
     }
 
     return (
         <div>
             <h2>Phonebook</h2>
-            <Notification message={currentMessage} />
+            <Notification messageType={messageType} message={currentMessage} />
             <h3>Search</h3>
             <Search value={searchValue} onChange={handleSearchValue}/>
 
