@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import axios from "axios"
 import Search from "./components/Search";
 import AddPersonForm from "./components/AddPersonForm";
 import PhonebookEntries from "./components/PhonebookEntries";
@@ -15,10 +14,10 @@ const App = () => {
     const [messageType, setMessageType] = useState(null)
 
     useEffect(() => {
-        axios
-            .get("http://localhost:3001/persons")
+        personService
+            .getPersons()
             .then((response) => {
-                setPersons(response.data)
+                setPersons(response)
             })
     }, [])
 
