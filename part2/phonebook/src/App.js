@@ -48,7 +48,7 @@ const App = () => {
 
     const addPerson = (event) => {
         event.preventDefault()
-        const potentiallyExistingPerson = persons.find(person => person.name === newName)
+        const potentiallyExistingPerson = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
         if (potentiallyExistingPerson && window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
 
             const updatedPerson = {...potentiallyExistingPerson, number: newNumber}
