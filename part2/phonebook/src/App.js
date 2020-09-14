@@ -56,8 +56,7 @@ const App = () => {
                 .updatePerson(updatedPerson)
                 .then(response => setPersons(persons.map(person => person.id === updatedPerson.id ? response : person)))
                 .catch((error) => {
-                    console.log(error)
-                    handleMessage(`${updatedPerson.name} has already been removed from server.`,5000, MessageTypeEnum.ERROR)
+                    handleMessage(error.response.data.error,5000, MessageTypeEnum.ERROR)
                 })
 
             resetForm()
@@ -72,10 +71,14 @@ const App = () => {
 
         personService
             .addPerson(newPerson)
-            .then(response => setPersons(persons.concat(response)))
-
+            .then(response => {
+                handleMessage(`Added ${newPerson.name} to phonebook.`, 5000, MessageTypeEnum.SUCCESS)
+                setPersons(persons.concat(response))
+            })
+            .catch(error => {
+                handleMessage(error.response.data.error, 5000, MessageTypeEnum.ERROR)
+            })
         resetForm()
-        handleMessage(`Added ${newPerson.name} to phonebook.`, 5000, MessageTypeEnum.SUCCESS)
     }
     
     const deletePerson = (person) => () => {
