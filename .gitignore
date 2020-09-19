@@ -1,2 +1,4 @@
-/playground/
-/part3node/
+**/.env
+**/.eslintignore
+**/.eslintrc.js
+
