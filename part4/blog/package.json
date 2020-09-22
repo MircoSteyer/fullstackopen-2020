@@ -4,7 +4,7 @@
   "description": "Part 4 Blog List application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "lint": "eslint .",
     "dev": "nodemon index.js",
     "start": "node index.js"
@@ -15,12 +15,18 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.10.6"
+    "mongoose": "^5.10.6",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.8",
+    "@types/jest": "^26.0.14",
     "@types/mongoose": "^5.7.36",
     "eslint": "^7.9.0",
+    "jest": "^26.4.2",
     "nodemon": "^2.0.4"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
