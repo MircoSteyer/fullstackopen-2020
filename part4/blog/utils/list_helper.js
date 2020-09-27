@@ -52,8 +52,6 @@ const mostLikes = (blogs) => {
         }
     })
 
-    console.log("authorAndLikes", authorAndLikes)
-
     if (authorAndLikes.length === 0) return {error: "No blogs given."}
 
     return authorAndLikes.reduce((previous, current) => {

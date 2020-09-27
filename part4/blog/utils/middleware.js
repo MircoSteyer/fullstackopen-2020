@@ -1,9 +1,7 @@
-const unknownEndpoint = (req, res, next) => {
-    try {
-        res.json({error: "Unknown endpoint."})
-    } catch (e) {
-        next(e)
-    }
+require("express-async-errors")
+
+const unknownEndpoint = (req, res) => {
+    res.status(404).json({error: "Unknown endpoint."})
 }
 
 const errorHandler = (error, req, res, next) => {

@@ -1,3 +1,1 @@
-Add defined middleware before end of 4.1
-
-change blogController to async/await structure
+preparations to 4.8 should be done now

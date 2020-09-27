@@ -1,3 +1,4 @@
+require("express-async-errors")
 const express = require("express")
 const app = express()
 const config = require("./utils/config")
@@ -7,8 +8,9 @@ const mongoose = require("mongoose")
 const blogRouter = require("./controllers/blogController")
 const morgan = require("morgan")
 
+
 mongoose.connect(config.MONGODB_URI, {useUnifiedTopology: true, useNewUrlParser: true})
-    .then(() => {console.log("Connected to MongoDB")})
+    .then(() => {console.log("Connected to MongoDB", config.MONGODB_URI)})
     .catch(error => {console.log("Error: ", error.message)})
 
 app.use(express.json())
