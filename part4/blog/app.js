@@ -10,12 +10,16 @@ const morgan = require("morgan")
 
 
 mongoose.connect(config.MONGODB_URI, {useUnifiedTopology: true, useNewUrlParser: true})
-    .then(() => {console.log("Connected to MongoDB", config.MONGODB_URI)})
+    .then(() => {console.log("Connected to MongoDB")})
     .catch(error => {console.log("Error: ", error.message)})
 
 app.use(express.json())
 app.use(cors())
 app.use(morgan("dev"))
+
+app.get("/", (req, res) => {
+    res.send("<h1>Hello World</h1>")
+})
 
 app.use("/api/blogs", blogRouter)
 app.use(middleware.unknownEndpoint)
