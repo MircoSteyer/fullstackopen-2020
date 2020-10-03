@@ -6,10 +6,11 @@ const middleware = require("./utils/middleware")
 const cors = require("cors")
 const mongoose = require("mongoose")
 const blogRouter = require("./controllers/blogController")
+const userRouter = require("./controllers/userController")
 const morgan = require("morgan")
 
 
-mongoose.connect(config.MONGODB_URI, {useUnifiedTopology: true, useNewUrlParser: true})
+mongoose.connect(config.MONGODB_URI, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true})
     .then(() => {console.log("Connected to MongoDB")})
     .catch(error => {console.log("Error: ", error.message)})
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/blogs", blogRouter)
+app.use("/api/users", userRouter)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 module.exports = app

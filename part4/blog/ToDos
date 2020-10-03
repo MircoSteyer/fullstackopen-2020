@@ -1,1 +1,6 @@
-preparations to 4.8 should be done now
+
+implement login controller, login gets returned token
+require for posts and puts and deltes(?) on blogs the token authentication
+deal with json webtoken errors via errorhandler middleware
+test everything manually
+rewrite tests
