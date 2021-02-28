@@ -37,7 +37,7 @@ beforeAll(async () => {
             password: "testuser"})
 })
 
-describe("blog tests", () => {
+describe("bloglist-frontend tests", () => {
 
     beforeEach(async () => {
         jest.setTimeout(10000)
@@ -80,7 +80,7 @@ describe("blog tests", () => {
 
     describe("post /api/blogs", () => {
 
-        test("adding blog increases amount of blogs by one", async () => {
+        test("adding bloglist-frontend increases amount of blogs by one", async () => {
             const newBlog = {
                 title: "Test Blog 4",
                 author: "Different Test Person",
@@ -98,7 +98,7 @@ describe("blog tests", () => {
 
         })
 
-        test("correctly formatted blog is added", async () => {
+        test("correctly formatted bloglist-frontend is added", async () => {
             const newBlog = {
                 title: "Test Blog 4",
                 author: "Different Test Person",
@@ -120,7 +120,7 @@ describe("blog tests", () => {
             }))
         })
 
-        test("adding blog without title or author fails, denies with reason", async () => {
+        test("adding bloglist-frontend without title or author fails, denies with reason", async () => {
             const newBlog = {
                 url: "www.testblog4.com",
                 likes: 4
@@ -131,7 +131,7 @@ describe("blog tests", () => {
                 .expect(400, {error: "Blog validation failed: title: Title is required., author: Author is required."})
         })
 
-        test("adding blog without likes will default likes to 0", async () => {
+        test("adding bloglist-frontend without likes will default likes to 0", async () => {
             const newBlog = {
                 title: "Test Blog 4",
                 author: "Different Test Person",
