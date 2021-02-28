@@ -66,7 +66,7 @@ test("dummy returns 1", () => {
 
 describe("total likes ", () => {
 
-    test("work with zero as sum and single bloglist-frontend", () => {
+    test("work with zero as sum and single bloglist-backend", () => {
         const result = listHelper.totalLikes(singleBlogZeroLikes)
         expect(result).toBe(0)
     })
@@ -76,7 +76,7 @@ describe("total likes ", () => {
         expect(result).toBe(0)
     })
 
-    test("work for a list with single bloglist-frontend", () => {
+    test("work for a list with single bloglist-backend", () => {
         const result = listHelper.totalLikes(singleBlog)
         expect(result).toBe(5)
     })
@@ -87,9 +87,9 @@ describe("total likes ", () => {
     })
 })
 
-describe("favorite bloglist-frontend by likes ", () => {
+describe("favorite bloglist-backend by likes ", () => {
 
-    test("works with a single bloglist-frontend", () => {
+    test("works with a single bloglist-backend", () => {
         const result = listHelper.favoriteBlog(singleBlog)
         expect(result).toEqual({
             title: "Go To Statement Considered Harmful",
@@ -116,7 +116,7 @@ describe("author with most blogs", () => {
         expect(result).toEqual({error: "No blogs given."})
     })
 
-    test("works with single bloglist-frontend", () => {
+    test("works with single bloglist-backend", () => {
         const result = listHelper.mostBlogs(singleBlog)
         expect(result).toEqual({author: "Edsger W. Dijkstra", blogs: 1})
     })
@@ -130,17 +130,17 @@ describe("author with most blogs", () => {
 
 describe("author with most likes", () => {
 
-    test("works with no bloglist-frontend", () => {
+    test("works with no bloglist-backend", () => {
         const result = listHelper.mostLikes(emptyBlogList)
         expect(result).toEqual({error: "No blogs given."})
     })
 
-    test("works with single bloglist-frontend", () => {
+    test("works with single bloglist-backend", () => {
         const result = listHelper.mostLikes(singleBlog)
         expect(result).toEqual({author: "Edsger W. Dijkstra", likes: 5})
     })
 
-    test("works with single bloglist-frontend with no likes", () => {
+    test("works with single bloglist-backend with no likes", () => {
         const result = listHelper.mostLikes(singleBlogZeroLikes)
         expect(result).toEqual({author: "Edsger W. Dijkstra", likes: 0})
     })

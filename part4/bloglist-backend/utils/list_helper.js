@@ -10,7 +10,7 @@ const totalLikes = (blogs) => {
 }
 
 const favoriteBlog = (blogs) => {
-    /*const favoriteBlog = Math.max.apply(Math, blogs.map(bloglist-frontend => bloglist-frontend.likes))*/
+    /*const favoriteBlog = Math.max.apply(Math, blogs.map(bloglist-backend => bloglist-backend.likes))*/
     const favoriteBlog = blogs.reduce((previous, current) => {
         return (previous.likes < current.likes) ? current : previous
     })
