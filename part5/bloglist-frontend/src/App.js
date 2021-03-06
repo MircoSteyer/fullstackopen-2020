@@ -12,6 +12,12 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState({type: "", message: ""})
 
+  // description of what's happening here:
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+  const blogsSortedByLikes = blogs.sort((a, b) => {
+      return b.likes - a.likes
+  })
+
   const togglableRef = useRef()
 
   useEffect(() => {
@@ -64,7 +70,19 @@ const App = () => {
 
   const updateBlog = async (blogToUpdate) => {
     const response = await blogService.updateBlog(blogToUpdate)
+    console.log("updatedblog2", response)
     setBlogs(blogs.map(blog => blog === blogToUpdate ? response : blog))
+  }
+
+  const deleteBlog = async (blogToDelete) => {
+      if (window.confirm("Do you really want to delete your blog?")) {
+          try {
+              const response = await blogService.deleteBlog(blogToDelete)
+              console.log("we are done here")
+              setBlogs(blogs.filter(blog => blog !== blogToDelete))
+          } catch (e) {
+          }
+      }
   }
 
   if (!user) {
@@ -85,8 +103,8 @@ const App = () => {
       <Togglable buttonLabel={"new blog"} ref={togglableRef}>
         <BlogForm addBlog={addBlog}/>
       </Togglable>
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
+      {blogsSortedByLikes.map(blog =>
+        <Blog key={blog.id} blog={blog} updateBlog={updateBlog} user={user} deleteBlog={deleteBlog} />
       )}
     </div>
   )

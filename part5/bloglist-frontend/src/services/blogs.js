@@ -37,4 +37,12 @@ const updateBlog = async (blog) => {
    }
 }
 
-export default { getAll, createBlog, updateBlog, setToken }
+const deleteBlog = async (blog) => {
+    try {
+      const response = await axios.delete(`${baseUrl}/${blog.id}`, config)
+      return response.data
+    } catch (e) {
+    }
+}
+
+export default { getAll, createBlog, updateBlog, deleteBlog, setToken }
