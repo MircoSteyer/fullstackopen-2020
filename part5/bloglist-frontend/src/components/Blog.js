@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import PropTypes from "prop-types"
 
 const Blog = ({ blog, updateBlog, deleteBlog,  user }) => {
 
@@ -15,7 +16,7 @@ const Blog = ({ blog, updateBlog, deleteBlog,  user }) => {
   const viewDetails = () => {
       setShowBlogDetails(!showBlogDetails)
   }
-  
+
   const addNewLike = () => {
       blog.likes += 1
       const updatedBlog = {...blog}
@@ -45,6 +46,13 @@ const Blog = ({ blog, updateBlog, deleteBlog,  user }) => {
           {blog.user.username === user.username && <button onClick={() => deleteBlog(blog)}>delete</button>}
       </div>
   )
+}
+
+Blog.propTypes = {
+    blog: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    deleteBlog: PropTypes.func.isRequired,
+    updateBlog: PropTypes.func.isRequired
 }
 
 export default Blog
