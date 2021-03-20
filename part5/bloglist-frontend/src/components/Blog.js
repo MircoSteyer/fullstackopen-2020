@@ -20,17 +20,16 @@ const Blog = ({ blog, updateBlog, deleteBlog,  user }) => {
   const addNewLike = () => {
       blog.likes += 1
       const updatedBlog = {...blog}
-      console.log("updatedBlog", updatedBlog)
       updateBlog(updatedBlog)
   }
 
   return (
       <div style={blogStyle}>
-        <div>
+        <div className={"blogPreview"}>
           {blog.title} {blog.author}
         </div>
         {showBlogDetails &&
-        <div>
+        <div className={"blogDetails"}>
           <div>
             {blog.url},
           </div>
